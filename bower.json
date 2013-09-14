@@ -2,9 +2,6 @@
   "name": "Spa Seed",
   "version": "0.0.1",
   "homepage": "https://github.com/ghernandez345/spaSeed",
-  "authors": [
-    "Gabe Hernandez <ghernandez345@gmail.com>"
-  ],
   "license": "MIT",
   "private": true,
   "ignore": [
