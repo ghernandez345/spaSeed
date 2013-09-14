@@ -15,7 +15,7 @@ module.exports = function(grunt) {
    * CSS files to inject in order
    */
   var cssFilesToInject = [
-    'assets/styles/**/*.css'
+    'styles/**/*.css'
   ];
 
 
@@ -24,9 +24,12 @@ module.exports = function(grunt) {
    */
   var jsFilesToInject = [
     // *->    put dependencies here   <-*
+    'vendor/jquery/jquery.min.js',
+    'vendor/lodash/dist/lodash.min.js',
+    'vendor/backbone/backbone-min.js',
 
     // All of the rest of your app scripts imported here
-    'assets/js/**/*.js'
+    'js/**/*.js'
   ];
 
 
@@ -35,7 +38,7 @@ module.exports = function(grunt) {
    * The ordering of these templates shouldn't matter.
    */
   var templateFilesToInject = [
-    'assets/templates/**/*.html'
+    'templates/**/*.html'
   ];
 
 
@@ -84,6 +87,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    // File copying
     copy: {
       dev: {
         files: [{
@@ -103,11 +107,13 @@ module.exports = function(grunt) {
       }
     },
 
+    // Emptying .tmp directory
     clean: {
       dev: ['.tmp/public/**'],
       build: ['www']
     },
 
+    // Precompiling underscore templates
     jst: {
       dev: {
         options: {
@@ -121,6 +127,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // Less compilation
     less: {
       dev: {
         files: [{
@@ -139,6 +146,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // Script and styles concatination
     concat: {
       js: {
         src: jsFilesToInject,
@@ -150,6 +158,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // script uglify
     uglify: {
       dist: {
         src: ['.tmp/public/concat/production.js'],
@@ -157,6 +166,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // css minification
     cssmin: {
       dist: {
         src: ['.tmp/public/concat/production.css'],
@@ -164,8 +174,10 @@ module.exports = function(grunt) {
       }
     },
 
+    // File injecting
     'sails-linker': {
 
+      // Script injection
       devJs: {
         options: {
           startTag: '<!--SCRIPTS-->',
@@ -194,6 +206,7 @@ module.exports = function(grunt) {
         }
       },
 
+      // Style injection
       devStyles: {
         options: {
           startTag: '<!--STYLES-->',
@@ -201,8 +214,6 @@ module.exports = function(grunt) {
           fileTmpl: '<link rel="stylesheet" href="%s">',
           appRoot: '.tmp/public'
         },
-
-        // cssFilesToInject defined up top
         files: {
           '.tmp/public/**/*.html': cssFilesToInject,
           'views/**/*.html': cssFilesToInject,
@@ -224,7 +235,7 @@ module.exports = function(grunt) {
         }
       },
 
-      // Bring in JST template object
+      // JST file injection
       devTpl: {
         options: {
           startTag: '<!--TEMPLATES-->',
