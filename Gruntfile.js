@@ -15,7 +15,11 @@ module.exports = function(grunt) {
    * CSS files to inject in order
    */
   var cssFilesToInject = [
-    'vendor/bootstrap/dist/css/bootstrap.min.css'
+    // vendor styles
+    'vendor/bootstrap/dist/css/bootstrap.min.css',
+
+    // balderdash styles
+    'styles/main.css'
   ];
 
 
@@ -93,7 +97,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: './assets',
-          src: ['**/*'],
+          src: ['**/*', '!styles/**/*.less'],
           dest: '.tmp/public'
         }]
       },
@@ -130,19 +134,9 @@ module.exports = function(grunt) {
     // Less compilation
     less: {
       dev: {
-        files: [{
-          expand: true,
-          cwd: 'assets/styles/',
-          src: ['*.less'],
-          dest: '.tmp/public/styles/',
-          ext: '.css'
-        }, {
-          expand: true,
-          cwd: 'assets/linker/styles/',
-          src: ['*.less'],
-          dest: '.tmp/public/linker/styles/',
-          ext: '.css'
-        }]
+        files: {
+          '.tmp/public/styles/main.css': 'assets/styles/importer.less'
+        }
       }
     },
 
