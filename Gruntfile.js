@@ -235,12 +235,8 @@ module.exports = function(grunt) {
       }
     },
 
+    // Watching file changes
     watch: {
-      api: {
-
-        // API files to watch:
-        files: ['api/**/*']
-      },
       assets: {
 
         // Assets to watch:
