@@ -31,6 +31,7 @@ module.exports = function(grunt) {
     'vendor/jquery/jquery.min.js',
     'vendor/lodash/dist/lodash.min.js',
     'vendor/backbone/backbone-min.js',
+    'vendor/mast/mast.js',
 
     // All of the rest of your app scripts imported here
     'js/**/*.js'

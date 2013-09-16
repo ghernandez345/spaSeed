@@ -6,21 +6,25 @@
     <title>spa seed</title>
     <meta name="description" content="Internal Balderdash SPA seed">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
     <!--STYLES-->
     <!--STYLES END-->
-
   </head>
-
   <body>
-
     <h1>seed test</h1>
-
 
     <!--TEMPLATES-->
     <!--TEMPLATES END-->
 
     <!--SCRIPTS-->
     <!--SCRIPTS END-->
-    </body>
+
+    <script>
+      // Modify JST templates to eliminate the nasty parts of the file path
+      _.each(JST, function (fn, path) {
+        var id = path.match(/\/([^\/]+)\..+$/)[1];
+        FRAMEWORK.templates[id] = fn;
+      });
+      FRAMEWORK.raise();
+    </script>
+  </body>
 </html>
